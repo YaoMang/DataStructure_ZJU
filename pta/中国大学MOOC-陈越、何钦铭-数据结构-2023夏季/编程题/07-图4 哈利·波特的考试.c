@@ -89,21 +89,12 @@ MGraph CopyMGraph(MGraph G)
     return ret;
 }
 
-// Floyd 算法
+// Floyd 算法 裁剪之后的，本题不需要路径矩阵
+// 并且应当注意INFINITY值的大小，防止发生溢出导致程序运行出现问题
 Matrix Floyd(MGraph G)
 {
     // 距离矩阵，初始化时进行复制操作
     MGraph D = CopyMGraph(G);
-    
-    // 路径矩阵，初始化时设置为不存在的结点编号
-    MGraph P = CreateMGraph(G.col);
-    for(int i = 0; i < P.row; ++i)
-    {
-        for(int j = 0; j < P.col; ++j)
-        {
-            P.matrix[i][j] = -1;
-        }
-    }
 
     for(int k = 0; k < D.col; ++k)
     {
@@ -116,12 +107,10 @@ Matrix Floyd(MGraph G)
                     // 发现更近的边，更新距离并更新路径
                     D.matrix[i][j] = D.matrix[i][k] + D.matrix[k][j];
                 }
-                P.matrix[i][j] = k;
             }
         }
     }
-    // 释放路径矩阵空间
-    DestroyGraph(P);
+
     return D;
 }
 
@@ -142,6 +131,7 @@ void PrintMatrix(Matrix Mat)
 // 针对本题的程序和函数
 //----------
 
+// 注意设置问题，防止两个INFINITY值相加发生溢出
 #define INFINITY 0x0fffffff
 
 MGraph read();
@@ -160,6 +150,8 @@ int main()
 
     // 选择最小行输出
     FindAnimal(D);
+    DestroyGraph(D);
+    DestroyGraph(G);
 
     return 0;
 }
