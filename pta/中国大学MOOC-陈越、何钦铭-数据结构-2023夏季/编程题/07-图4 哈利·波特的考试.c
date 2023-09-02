@@ -131,7 +131,7 @@ void PrintMatrix(Matrix Mat)
 // 针对本题的程序和函数
 //----------
 
-// 注意设置问题，防止两个INFINITY值相加发生溢出
+// 注意设置问题，防止两个INFINITY值相加发生溢出 Function::Floyd
 #define INFINITY 0x0fffffff
 
 MGraph read();
