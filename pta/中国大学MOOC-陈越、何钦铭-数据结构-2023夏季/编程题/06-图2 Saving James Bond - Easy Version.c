@@ -146,7 +146,7 @@ int main()
         if(calDistanceBoundary(array + i) <= D){
             ConnectVertex(G, i, N);
         }
-        if(calDistance(&BondPoint, array + i) - 15 <= D){
+        if(calDistance(&BondPoint, array + i) - 7.5 <= D){ // 代码修订，题目中的描述为15直径
             ConnectVertex(G, i, N + 1);
         }
     }
